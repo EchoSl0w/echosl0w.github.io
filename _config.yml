@@ -1,33 +1,45 @@
 theme: jekyll-theme-chirpy
 lang: en
-timezone: Asia/Calcutta
+timezone: Europe/Berlin
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: SoumyaK4 # the main title
+title: Echo_Slow # the main title
 
-tagline: Jack of All Trades # it will display as the subtitle
+tagline: Penetration tester and wannabe red teamer # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
   Martial Arts for Body & Brain
 
-url: "https://soumyak4.in"
-
-social:
-  name: SoumyaK4
-  links:
-    - https://soumyak4.in
+url: ""
 
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings
+
+github:
+  username: EchoSl0w # change to your GitHub username
+
+social:
+  # Change to your full name.
+  # It will be displayed as the default author of the posts and the copyright owner in the Footer
+  name: Echo_Slow
+  email: j37933928@gmail.com # change to your email address
+  fediverse_handle: # fill in your fediverse handle. E.g. "@username@domain.com"
+  links:
+    # The first element serves as the copyright owner's link
+    # - https://twitter.com/username # change to your Twitter homepage
+    - https://github.com/EchoSl0w # change to your GitHub homepage
+    # Uncomment below to add more social links
+    # - https://www.facebook.com/username
+    # - https://www.linkedin.com/in/username
 
 # Web Analytics Settings
 analytics:
   google:
     id: # fill in your Google Analytics ID
   goatcounter:
-    id: soumyak4 # fill in your GoatCounter ID
+    id: echoslow # fill in your GoatCounter ID
 
 # Page views settings
 pageviews:
@@ -36,20 +48,20 @@ pageviews:
 theme_mode: dark # [light | dark]
 
 # the avatar on sidebar, support local or CORS resources
-avatar: "/assets/img/Logo.png"
+avatar: "/assets/img/profile/profile.png"
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
-social_preview_image: "/assets/img/OG.png" # string, local or CORS resources
+social_preview_image: "/assets/img/profile/profile.png" # string, local or CORS resources
 
 # boolean type, the global switch for TOC in posts.
 toc: true
 future: true
 
 pwa:
-  enabled: true # The option for PWA feature (installable)
+  enabled: false # The option for PWA feature (installable)
   cache:
-    enabled: false # The option for PWA offline cache
+    enabled: true # The option for PWA offline cache
     # Paths defined here will be excluded from the PWA cache.
     # Usually its value is the `baseurl` of another website that
     # shares the same domain name as the current website.
@@ -60,6 +72,28 @@ paginate: 22
 
 # The base URL of your site
 baseurl: ""
+
+comments:
+  # Global switch for the post-comment system. Keeping it empty means disabled.
+  provider: giscus
+  # The provider options are as follows:
+  disqus:
+    shortname: # fill with the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
+  # utterances settings › https://utteranc.es/
+  utterances:
+    repo: # <gh-username>/<repo>
+    issue_term: # < url | pathname | title | ...>
+  # Giscus options › https://giscus.app
+  giscus:
+    repo: "EchoSl0w/echosl0w.github.io-Comments" # <gh-username>/<repo>
+    repo_id: "R_kgDORXFaIA"
+    category: "General"
+    category_id: "DIC_kwDORXFaIM4C3D_y"
+    mapping: # optional, default to 'pathname'
+    strict: # optional, default to '0'
+    input_position: # optional, default to 'bottom'
+    lang: # optional, default to the value of `site.lang`
+    reactions_enabled: # optional, default to the value of `1`
 
 # ------------ The following options are not recommended to be modified ------------------
 

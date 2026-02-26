@@ -21,18 +21,18 @@
       <!-- home -->
       <li class="nav-item{% if page.layout == 'profile' %}{{ " active" }}{% endif %}">
         <a href="{{ '/' | relative_url }}" class="nav-link">
-          <i class="fa-fw fas fa-user-astronaut"></i>
+          <i class="fa-fw fas fa-id-card"></i>
           <span>PROFILE</span>
         </a>
       </li>
       <!-- projects -->
       <li class="nav-item{% if page.layout == 'home' %}{{ " active" }}{% endif %}">
-        <a href="{{ '/Projects/' | relative_url }}" class="nav-link">
-          <i class="fa-fw fas fa-star"></i>
-          <span>PROJECTS</span>
+        <a href="{{ '/Blog/' | relative_url }}" class="nav-link">
+          <i class="fa-fw fas fa-blog"></i>
+          <span>BLOG</span>
         </a>
       </li>
-      
+
       <!-- the real tabs -->
       {% for tab in site.tabs %}
         <li class="nav-item{% if tab.url == page.url %}{{ " active" }}{% endif %}">
@@ -72,6 +72,8 @@
           {%- endcapture -%}
         {% when 'rss' %}
           {% assign url = '/feed.xml' | relative_url %}
+        {% when 'rss2' %}
+          {% assign url = '/htb-feed.xml' | relative_url %}
         {% else %}
           {% assign url = entry.url %}
       {% endcase %}

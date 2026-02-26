@@ -4,7 +4,6 @@ description: A short poem
 date: 2025-08-4 00:00:00 +0530
 category: [Poem, Short]
 type: blog
-pin: true
 ---
 
 ## The Storm 

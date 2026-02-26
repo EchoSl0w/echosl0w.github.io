@@ -4,8 +4,8 @@ description: Just a list of domains & subdomains I have
 date: 2023-02-17 00:00:00 +0530
 category: [Projects]
 tag: [Jekyll, Flask]
-type: project 
-permalink: /project/rs/
+type: blog 
+pin: true
 ---
 
 1. [SoumyaK4](https://soumyak4.in)
