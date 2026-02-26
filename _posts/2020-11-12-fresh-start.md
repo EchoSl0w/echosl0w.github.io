@@ -7,4 +7,4 @@ tag: [Tag 1, Tag 2]
 type: writeup
 
 ---
-![alt text](assets/img/sukuna-resize.webp)
+

@@ -4,7 +4,7 @@ description: The most advanced rhyming game on the web
 date: 2025-08-14 00:00:00 +0530
 category: [None, Rhyme]
 type: blog
-tags: HTB
+tag: HTB
 ---
 
 ## [RhymeTime](https://rhymetime.soumyak4.in)
