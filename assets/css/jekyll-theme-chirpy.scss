@@ -3,7 +3,7 @@
 
 // https://github.com/cotes2020/jekyll-theme-chirpy/issues/2353
 @use 'main
-%- if jekyll.environment == ' production ' -%}
+{%- if jekyll.environment == 'production' -%}
   .bundle
 {%- endif -%}
 ';
