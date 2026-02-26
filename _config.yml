@@ -12,7 +12,7 @@ tagline: Penetration tester and wannabe red teamer # it will display as the subt
 description: >- # used by seo meta and the atom feed
   Martial Arts for Body & Brain
 
-url: "https://echosl0w.github.io"
+url: "https://echosl0w.github.io/"
 
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings
