@@ -11,6 +11,26 @@ Greetings reader, I'm Echo_Slow (Mijo Misic). You've probably seen me around in 
 
 ## Certifications
 
-I like to collect badges, but these should not be used solely to determine someone's skill.
+I like to collect badges, but these should not be used to solely determine someone's skill.
 
-![alt text](/assets/img/profile/RTO.png)
+![alt text](/assets/img/profile/OSCP.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/RTL.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/RTO.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/CWEE.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/CWES.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/CRTP.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/eJPT.png){: w="70" h="15" .left}
+
+<BR CLEAR=ALL />
+
+## Goals
+
+- [ ] OSEP
+- [ ] OSED
+- [ ] OSWE
+- [ ] OSEE
+- [ ] ARTOC
+- [ ] ODPC
+- [ ] 100% Hack The Box
+
+![alt text](/assets/img/profile/HTB-profile.png){: w="300" h="200"}
+
+- [ ] 100% Pwn.College
+
+![alt text](/assets/img/profile/pwncollege-profile.png){: w="300" h="200"}
+
+

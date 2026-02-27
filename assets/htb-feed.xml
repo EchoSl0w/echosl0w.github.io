@@ -8,7 +8,7 @@ permalink: /htb-feed.xml
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>{{ "/" | absolute_url }}</id>
   <title>{{ site.title }}</title>
-  <subtitle>{{ site.description }}</subtitle>
+  <subtitle>Hack The Box writeups</subtitle>
   <updated>{{ site.time | date_to_xmlschema }}</updated>
   <author>
     <name>{{ site.social.name }}</name>
