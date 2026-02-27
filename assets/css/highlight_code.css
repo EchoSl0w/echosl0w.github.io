@@ -1,0 +1,9 @@
+.highlight {
+  .code-highlight {
+    background-color: yellow !important;
+    color: black !important;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: bold;
+  }
+}
