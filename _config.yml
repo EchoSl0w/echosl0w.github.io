@@ -12,7 +12,7 @@ tagline: Penetration tester and wannabe red teamer # it will display as the subt
 description: >- # used by seo meta and the atom feed
   Technical writeups of cybersecurity topics.
 
-url: "https://echosl0w.github.io"
+url: "https://echoslow.dev"
 
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings
