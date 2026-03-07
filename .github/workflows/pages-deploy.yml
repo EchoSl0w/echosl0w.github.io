@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 jobs:
   deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       deployments: write
@@ -34,5 +34,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy _site --project-name=${{env.PROJECT_NAME}}
+          command: pages deploy _site --project-name="blog"
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
