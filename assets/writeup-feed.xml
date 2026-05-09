@@ -1,14 +1,14 @@
 ---
 layout: compress
-permalink: /htb-feed.xml
+permalink: /writeup-feed.xml
 # Atom Feed, reference: https://validator.w3.org/feed/docs/atom.html
 ---
 
 {% capture source %}
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>{{ "/" | absolute_url }}</id>
-  <title>{{ site.title }}</title>
-  <subtitle>Hack The Box writeups</subtitle>
+  <title>Echo_Slow - CTF</title>
+  <subtitle>Feed contains CTF writeups</subtitle>
   <updated>{{ site.time | date_to_xmlschema }}</updated>
   <author>
     <name>{{ site.social.name }}</name>
@@ -23,7 +23,7 @@ permalink: /htb-feed.xml
   <logo>{{ site.baseurl }}/assets/img/favicons/favicon-96x96.png</logo>
 
 {% for post in site.posts %}
-  {% if post.tags contains "HTB" %}
+  {% if post.tags contains "CTF" %}
     {% assign post_absolute_url = post.url | absolute_url %}
     <entry>
       <title>{{ post.title }}</title>

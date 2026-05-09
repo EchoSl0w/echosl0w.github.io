@@ -73,7 +73,7 @@
         {% when 'rss' %}
           {% assign url = '/feed.xml' | relative_url %}
         {% when 'rss2' %}
-          {% assign url = '/htb-feed.xml' | relative_url %}
+          {% assign url = '/writeup-feed.xml' | relative_url %}
         {% else %}
           {% assign url = entry.url %}
       {% endcase %}
