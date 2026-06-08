@@ -13,6 +13,7 @@ Greetings reader, I'm Echo_Slow (Mijo Misic). You've probably seen me around in 
 
 - CVE-2024-46624
 - CVE-2024-46625
+- CVE-2026-25600
 - CVE-2026-25601
 
 ## Certifications
