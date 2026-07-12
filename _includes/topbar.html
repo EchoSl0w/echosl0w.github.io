@@ -12,6 +12,30 @@
         <!-- index page -->
         <span>{{ site.data.locales[include.lang].tabs.home | capitalize }}</span>
 
+      {% elsif page.layout == 'category' %}
+        <span>
+          <a href="{{ '/' | relative_url }}">
+            {{- site.data.locales[include.lang].tabs.home | capitalize -}}
+          </a>
+        </span>
+
+        <span>
+          <a href="{{ '/categories/' | relative_url }}">
+            {{- site.data.locales[include.lang].tabs.categories | default: 'Categories' -}}
+          </a>
+        </span>
+
+        {% if page.parent_category %}
+          {% assign parent_slug = page.parent_category | slugify %}
+          <span>
+            <a href="{{ '/categories/' | append: parent_slug | append: '/' | relative_url }}">
+              {{- page.parent_category -}}
+            </a>
+          </span>
+        {% endif %}
+
+        <span>{{ page.title }}</span>
+
       {% else %}
         {% for item in paths %}
           {% if forloop.first %}
@@ -28,9 +52,9 @@
               <span>{{ page.title }}</span>
             {% endif %}
 
-          {% elsif page.layout == 'category' or page.layout == 'tag' %}
+          {% elsif page.layout == 'tag' %}
             <span>
-              <a href="{{ item | append: '/' | relative_url }}">
+              <a href="{{ '/tags/' | append: item | append: '/' | relative_url }}">
                 {{- site.data.locales[include.lang].tabs[item] | default: page.title -}}
               </a>
             </span>

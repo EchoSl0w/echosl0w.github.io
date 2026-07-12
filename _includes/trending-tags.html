@@ -2,6 +2,16 @@
 
 {% assign MAX = 10 %}
 
+{% assign top_categories = '' | split: '' %}
+{% for post in site.posts %}
+  {% if post.categories.size > 0 %}
+    {% assign top_category = post.categories[0] %}
+    {% unless top_categories contains top_category %}
+      {% assign top_categories = top_categories | push: top_category %}
+    {% endunless %}
+  {% endif %}
+{% endfor %}
+
 {% assign size_list = '' | split: '' %}
 {% assign category_list = '' | split: '' %}
 
@@ -34,7 +44,7 @@
     {% assign category = category_str | split: '::' %}
     {% assign category_name = category | first %}
     {% assign category_size = category | last | plus: 0 %}
-    {% if category_size == size %}
+    {% if category_size == size and top_categories contains category_name %}
       {% unless trending_categories contains category_name %}
         {% assign trending_categories = trending_categories | push: category_name %}
         {% break %}

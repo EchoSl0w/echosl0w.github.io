@@ -26,7 +26,7 @@
         </a>
       </li>
       <!-- projects -->
-      <li class="nav-item{% if page.layout == 'home' %}{{ " active" }}{% endif %}">
+      <li class="nav-item{% if page.url == '/Blog/' or page.url == '/Blog' %}{{ " active" }}{% endif %}">
         <a href="{{ '/Blog/' | relative_url }}" class="nav-link">
           <i class="fa-fw fas fa-blog"></i>
           <span>BLOG</span>
@@ -35,7 +35,7 @@
 
       <!-- the real tabs -->
       {% for tab in site.tabs %}
-        <li class="nav-item{% if tab.url == page.url %}{{ " active" }}{% endif %}">
+        <li class="nav-item{% if tab.url == page.url or page.url == '/writeup/' and tab.title == 'Writeups' %}{{ " active" }}{% endif %}">
           <a href="{{ tab.url | relative_url }}" class="nav-link">
             <i class="fa-fw {{ tab.icon }}"></i>
             {% capture tab_name %}{{ tab.url | split: '/' }}{% endcapture %}

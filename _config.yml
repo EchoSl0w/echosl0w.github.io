@@ -68,7 +68,7 @@ pwa:
     deny_paths:
       # - "/example"  # URLs match `<SITE_URL>/example/*` will not be cached by the PWA
 
-paginate: 22
+# paginate: 22
 
 # The base URL of your site
 baseurl: ""
@@ -157,10 +157,23 @@ exclude:
   - "package*.json"
 
 jekyll-archives:
-  enabled: [categories, tags]
+  enabled: [tags]
   layouts:
     category: category
     tag: tag
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
+
+plugins:
+  # Your other plugins
+  - jekyll-paginate-v2
+
+whitelist:
+  - jekyll-paginate-v2
+
+pagination:
+  enabled: true
+  trail:
+    before: 2
+    after: 2

@@ -1,0 +1,36 @@
+---
+layout: page
+# The Category layout
+---
+
+{% include lang.html %}
+
+{% if page.parent_category %}
+  {% assign posts_to_show = site.posts | where_exp: 'post', 'post.categories[0] == page.parent_category and post.categories[1] == page.title and post.hidden != true' %}
+{% else %}
+  {% assign top_posts = site.posts | where_exp: 'post', 'post.categories[0] == page.title and post.hidden != true' %}
+  {% assign sub_posts = site.posts | where_exp: 'post', 'post.categories[1] == page.title and post.hidden != true' %}
+
+  {% assign posts_to_show = top_posts %}
+  {% if posts_to_show.size == 0 %}
+    {% assign posts_to_show = sub_posts %}
+  {% endif %}
+{% endif %}
+
+<div id="page-category">
+  <h1 class="ps-lg-2">
+    <i class="far fa-folder-open fa-fw text-muted"></i>
+    {{ page.title }}
+    <span class="lead text-muted ps-2">{{ posts_to_show | size }}</span>
+  </h1>
+
+  <ul class="content ps-0">
+    {% for post in posts_to_show %}
+      <li class="d-flex justify-content-between px-md-3">
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <span class="dash flex-grow-1"></span>
+        {% include datetime.html date=post.date class='text-muted small text-nowrap' lang=lang %}
+      </li>
+    {% endfor %}
+  </ul>
+</div>
