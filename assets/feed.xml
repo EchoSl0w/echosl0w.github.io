@@ -23,7 +23,7 @@ permalink: /feed.xml
   <logo>{{ site.baseurl }}/assets/img/favicons/favicon-96x96.png</logo>
 
 {% for post in site.posts %}
-  {% unless post.tags contains "HTB" %}
+  {% unless post.tags contains "CTF" %}
     {% assign post_absolute_url = post.url | absolute_url %}
     <entry>
       <title>{{ post.title }}</title>
