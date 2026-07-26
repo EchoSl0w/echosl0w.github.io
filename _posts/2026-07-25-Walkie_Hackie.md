@@ -116,6 +116,7 @@ _Flag obtained._
 The response contains the flag: `HTB{B4s1c_r4d10_fund4s}`, and with that the challenge is over.
 
 ## Extra Mile
+---
 
 In this extra mile I wanted to figure out an oddity in the waveform. UHR detects that the signal is modulated using FSK (Frequency Shift Keying) and it properly decodes it using FSK, yet the waveform indicates that the signal is using PSK (Phase Shift Keying). For a visual comparison:
 
