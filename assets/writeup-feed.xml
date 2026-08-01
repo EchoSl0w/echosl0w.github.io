@@ -51,6 +51,9 @@ permalink: /writeup-feed.xml
       {% assign post_image = post.image.path | default: post.image %}
     {% endif %}
 
+    {% capture feed_summary_text %}{% include post-summary.html max_length=400 %}{% endcapture %}
+    {% assign feed_summary_text = feed_summary_text | strip_html | normalize_whitespace | xml_escape %}
+
     {% if post_image %}
       {% assign post_image_url = post_image %}
       {% if post_image_url contains '://' %}
@@ -70,14 +73,15 @@ permalink: /writeup-feed.xml
 
       <link rel="enclosure" type="{{ post_image_type }}" href="{{ post_image_url | xml_escape }}" />
       <media:content url="{{ post_image_url | xml_escape }}" medium="image" type="{{ post_image_type }}" />
-      <summary type="html"><![CDATA[<img src="{{ post_image_url | xml_escape }}" alt="{{ post.title | xml_escape }}" style="max-width:100%;height:auto;" /><br />{% include post-summary.html max_length=400 %}]]></summary>
+      <summary type="html"><![CDATA[<img src="{{ post_image_url | xml_escape }}" alt="{{ post.title | xml_escape }}" style="max-width:100%;height:auto;" /><br />{{ feed_summary_text }}]]></summary>
     {% else %}
-      <summary>{% include post-summary.html max_length=400 %}</summary>
+      <summary type="text">{{ feed_summary_text }}</summary>
     {% endif %}
+    <content type="html"><![CDATA[<p>{{ feed_summary_text }}</p>]]></content>
 
     </entry>
   {% endif %}
 {% endfor %}
 </feed>
 {% endcapture %}
-{{ source | replace: '&', '&amp;' }}
+{{ source }}
