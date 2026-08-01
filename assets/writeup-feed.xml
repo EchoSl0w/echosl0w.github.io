@@ -5,7 +5,7 @@ permalink: /writeup-feed.xml
 ---
 
 {% capture source %}
-<feed xmlns="http://www.w3.org/2005/Atom">
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <id>{{ "/" | absolute_url }}</id>
   <title>Echo_Slow - CTF</title>
   <subtitle>Feed contains CTF writeups</subtitle>
@@ -46,7 +46,34 @@ permalink: /writeup-feed.xml
       {% endfor %}
     {% endif %}
 
-    <summary>{% include post-summary.html max_length=400 %}</summary>
+    {% assign post_image = nil %}
+    {% if post.image %}
+      {% assign post_image = post.image.path | default: post.image %}
+    {% endif %}
+
+    {% if post_image %}
+      {% assign post_image_url = post_image %}
+      {% if post_image_url contains '://' %}
+        {% assign post_image_url = post_image_url %}
+      {% else %}
+        {% assign post_image_url = post_image_url | absolute_url %}
+      {% endif %}
+
+      {% assign post_image_type = 'image/jpeg' %}
+      {% if post_image_url contains '.png' %}
+        {% assign post_image_type = 'image/png' %}
+      {% elsif post_image_url contains '.gif' %}
+        {% assign post_image_type = 'image/gif' %}
+      {% elsif post_image_url contains '.webp' %}
+        {% assign post_image_type = 'image/webp' %}
+      {% endif %}
+
+      <link rel="enclosure" type="{{ post_image_type }}" href="{{ post_image_url | xml_escape }}" />
+      <media:content url="{{ post_image_url | xml_escape }}" medium="image" type="{{ post_image_type }}" />
+      <summary type="html"><![CDATA[<img src="{{ post_image_url | xml_escape }}" alt="{{ post.title | xml_escape }}" style="max-width:100%;height:auto;" /><br />{% include post-summary.html max_length=400 %}]]></summary>
+    {% else %}
+      <summary>{% include post-summary.html max_length=400 %}</summary>
+    {% endif %}
 
     </entry>
   {% endif %}
