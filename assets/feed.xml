@@ -35,7 +35,6 @@ permalink: /feed.xml
       <updated>{{ post.date | date_to_xmlschema }}</updated>
     {% endif %}
       <id>{{ post_absolute_url }}</id>
-      <content type="text/html" src="{{ post_absolute_url }}" />
       <author>
         <name>{{ post.author | default: site.social.name }}</name>
       </author>
@@ -51,16 +50,18 @@ permalink: /feed.xml
       {% assign post_image = post.image.path | default: post.image %}
     {% endif %}
 
-    {% capture feed_summary_text %}{% include post-summary.html max_length=400 %}{% endcapture %}
-    {% assign feed_summary_text = feed_summary_text | strip_html | normalize_whitespace | xml_escape %}
+    {% if post.description %}
+      {% assign feed_summary_text = post.description | strip_html | normalize_whitespace | xml_escape %}
+    {% else %}
+      {% capture feed_summary_text %}{% include post-summary.html max_length=400 %}{% endcapture %}
+      {% assign feed_summary_text = feed_summary_text | strip_html | normalize_whitespace | xml_escape %}
+    {% endif %}
 
     {% if post_image %}
       {% assign post_image_url = post_image %}
-      {% if post_image_url contains '://' %}
-        {% assign post_image_url = post_image_url %}
-      {% else %}
+      {% unless post_image_url contains '://' %}
         {% assign post_image_url = post_image_url | absolute_url %}
-      {% endif %}
+      {% endunless %}
 
       {% assign post_image_type = 'image/jpeg' %}
       {% if post_image_url contains '.png' %}
@@ -74,10 +75,11 @@ permalink: /feed.xml
       <link rel="enclosure" type="{{ post_image_type }}" href="{{ post_image_url | xml_escape }}" />
       <media:content url="{{ post_image_url | xml_escape }}" medium="image" type="{{ post_image_type }}" />
       <summary type="html"><![CDATA[<img src="{{ post_image_url | xml_escape }}" alt="{{ post.title | xml_escape }}" style="max-width:100%;height:auto;" /><br />{{ feed_summary_text }}]]></summary>
+      <content type="html"><![CDATA[<img src="{{ post_image_url | xml_escape }}" alt="{{ post.title | xml_escape }}" style="max-width:100%;height:auto;" /><p>{{ feed_summary_text }}</p>]]></content>
     {% else %}
       <summary type="text">{{ feed_summary_text }}</summary>
+      <content type="html"><![CDATA[<p>{{ feed_summary_text }}</p>]]></content>
     {% endif %}
-    <content type="html"><![CDATA[<p>{{ feed_summary_text }}</p>]]></content>
 
     </entry>
   {% endunless %}
