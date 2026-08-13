@@ -23,7 +23,7 @@ Download the challenge file and extracting the contents results in a file named 
 ![Signal](/assets/img/writeups/Secure_Digital/signal.png)
 _Signals inside the capture._
 
-To decode the signals, we need to know what protocol the microSD card was talking. We can figure this out from the challenge intro, where is says the following: `unprotected serial interface`. This would imply that the communication protocol used was SPI (Serial Peripheral Interface).
+To decode the signals, we need to know what protocol the microSD card was talking. We can figure this out from the challenge intro, where it says the following: `unprotected serial interface`. This would imply that the communication protocol used was SPI (Serial Peripheral Interface).
 
 Luckily, Logic2 has a SPI analyzer:
 
@@ -63,7 +63,7 @@ From the image it's clear that the last signal is the Clock signal due to the fr
 
 The second to last signal is also clearly the Enable (CS/SS/nSS) signal. This signal is used to select a device and when it's pulled down to 0, the selected device is woken up. The signal remains pulled down to 0 during the entire data transfer window.
 
-The last thing to determine what signal is MOSI and MISO. It turns out that for decoding the data...it doesn't matter. Both the 1st and 2nd signal can be set to be MOSI or MISO and they will yield the same data. The data transferred between the SD and the PCB remains the same, MOSI/MISO only help determine the direction the data traveled. For proof you can see that setting the first signal to MOSI/MISO and the second to MOSI/MISO results in the same decoded data:
+The last thing to determine is which signals are MOSI and MISO. It turns out that for decoding the data...it doesn't matter. Both the 1st and 2nd signal can be set to be MOSI or MISO and they will yield the same data. The data transferred between the SD and the PCB remains the same, MOSI/MISO only help determine the direction the data traveled. For proof you can see that setting the first signal to MOSI/MISO and the second to MOSI/MISO results in the same decoded data:
 
 ![Same](/assets/img/writeups/Secure_Digital/same_data.png)
 _Same decoded data._

@@ -31,7 +31,7 @@ Now, I've never seen that file extension before and the `file` command results i
 Google provides the following AI summary:
 `A .complex file is primarily used as a raw radio frequency (RF) signal data file containing IQ (In-phase and Quadrature) data samples, often utilized in software like Universal Radio Hacker (URH)`.
 
-I wonder how much water that response took...anyways the summary says that the file type is often utilized by URH.
+I wonder how much water that response took... anyways, the summary says that the file type is often utilized by URH.
 
 We can install the software with pipx: `pipx install urh`.
 
@@ -51,7 +51,7 @@ URH also helpfully highlights what it calls the `preamble` and the `synchronizat
 3. `b2ff24`
 4. `b1ff57`
 
-The last segment seems to always contain `0xff` in the middle of the signal. Except that, no data can be retrieved, so we can take a look at the web page this challenge spawns.
+The last segment seems to always contain `0xff` in the middle of the signal. Other than that, no data can be retrieved, so we can take a look at the web page this challenge spawns.
 
 The web page allows us to send "RF signals over HTTP":
 
@@ -106,7 +106,7 @@ f9                      [Status: 200, Size: 2896, Words: 420, Lines: 134, Durati
 :: Progress: [256/256] :: Job [1/1] :: 0 req/sec :: Duration: [0:00:00] :: Errors: 0 ::
 ```
 
-By setting the first unknown to `c2` and brute-forcing the last part with `fuff` we get a different response when the last part is `f9`.
+By setting the first unknown to `c2` and brute-forcing the last part with `ffuf` we get a different response when the last part is `f9`.
 
 By going to the web page and manually sending the preamble as `aaaaaaaa`, synchronization word as `73214693`, and the payload as `c2fff9` we get the following response:
 
