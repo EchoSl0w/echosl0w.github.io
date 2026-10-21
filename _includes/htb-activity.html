@@ -1,0 +1,280 @@
+<div class="htb-card" id="htb-card">
+  <div class="htb-tabs" role="tablist">
+    <button class="htb-tab active" data-tab="machines" role="tab">Machines</button>
+    <button class="htb-tab" data-tab="sherlocks" role="tab">Sherlocks</button>
+    <button class="htb-tab" data-tab="challenges" role="tab">Challenges</button>
+  </div>
+
+  <div class="htb-panel active" data-panel="machines">
+    <div class="htb-body">
+      <div class="htb-graph" data-graph="machines"></div>
+      <div class="htb-ring" data-ring="machines"></div>
+    </div>
+  </div>
+
+  <div class="htb-panel" data-panel="sherlocks">
+    <div class="htb-body">
+      <div class="htb-graph" data-graph="sherlocks"></div>
+      <div class="htb-ring" data-ring="sherlocks"></div>
+    </div>
+  </div>
+
+  <div class="htb-panel" data-panel="challenges">
+    <div class="htb-body">
+      <div class="htb-graph" data-graph="challenges"></div>
+      <div class="htb-ring" data-ring="challenges"></div>
+    </div>
+  </div>
+
+  <div class="htb-updated" id="htb-updated"></div>
+</div>
+
+<style>
+  .htb-card {
+    background: #1e1e1e;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 14px;
+    max-width: 700px;
+    box-sizing: border-box;
+    color: #d4d4d4;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px;
+  }
+  .htb-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 12px;
+  }
+  .htb-tab {
+    background: transparent;
+    color: #d4d4d4;
+    border: 1px solid #3a4250;
+    border-radius: 4px;
+    padding: 6px 11px;
+    font: inherit;
+    cursor: pointer;
+  }
+  .htb-tab.active {
+    border-color: #5b9a48;
+    color: #5b9a48;
+  }
+  .htb-panel {
+    display: none;
+  }
+  .htb-panel.active {
+    display: block;
+  }
+  .htb-body {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .htb-graph {
+    flex: 1 1 260px;
+    min-width: 0;
+  }
+  .htb-graph svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .htb-ring {
+    width: 135px;
+    max-width: 100%;
+    flex: 0 0 auto;
+  }
+  .htb-ring svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .htb-updated {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #9aa4b2;
+  }
+</style>
+
+<script>
+  (function () {
+    const DATA = {{ site.data.htb_progress | jsonify }};
+    if (!DATA) return;
+
+    const LABELS = { machines: 'Machines', sherlocks: 'Sherlocks', challenges: 'Challenges' };
+    const RING_COLORS = {
+    'Very Easy': '#3b82f6', // blue
+    'Easy':      '#5b9a48', // green
+    'Medium':    '#e0b93a', // yellow
+    'Hard':      '#d64545', // red
+    'Insane':    '#c0c7d1', // silver
+    };
+    const FALLBACK_COLOR = '#9aa4b2';
+    const BAR_GREEN = '#5b9a48';
+    const TRACK_COLOR = '#353c47';
+    const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    // Tab label with completion count: "Machines 53/557"
+    function renderTab(tab, d) {
+      const btn = document.querySelector(`.htb-tab[data-tab="${tab}"]`);
+      if (btn) btn.textContent = `${LABELS[tab]} ${d.solved}/${d.total}`;
+    }
+
+    // Concentric rings: innermost = first difficulty, arc length = owned / total
+    function renderRing(tab, difficulties) {
+      const container = document.querySelector(`[data-ring="${tab}"]`);
+      if (!container) return;
+
+      const CX = 100, CY = 100, STROKE = 12, STEP = 16, OUTER = 92;
+      const polar = (r, deg) => {
+        const a = (deg - 90) * Math.PI / 180;
+        return [CX + r * Math.cos(a), CY + r * Math.sin(a)];
+      };
+      const arcPath = (r, pct) => {
+        const [x, y] = polar(r, pct * 360);
+        return `M ${CX} ${CY - r} A ${r} ${r} 0 ${pct > 0.5 ? 1 : 0} 1 ${x} ${y}`;
+      };
+
+      const count = difficulties.length;
+      const rings = difficulties.map((d, i) => ({
+        ...d,
+        radius: OUTER - (count - 1 - i) * STEP,
+        color: RING_COLORS[d.name] || FALLBACK_COLOR,
+        pct: d.total ? d.owned / d.total : 0,
+      }));
+
+      const tracks = rings.map((r) =>
+        `<circle cx="${CX}" cy="${CY}" r="${r.radius}" fill="none" stroke="${TRACK_COLOR}" stroke-width="${STROKE}" />`
+      ).join('');
+
+      const arcs = rings.map((r) => {
+        if (r.pct <= 0) return '';
+        const title = `<title>${r.name}: ${r.owned} / ${r.total} (${(r.pct * 100).toFixed(1)}%)</title>`;
+        return r.pct >= 0.9999
+          ? `<circle cx="${CX}" cy="${CY}" r="${r.radius}" fill="none" stroke="${r.color}" stroke-width="${STROKE}">${title}</circle>`
+          : `<path d="${arcPath(r.radius, r.pct)}" fill="none" stroke="${r.color}" stroke-width="${STROKE}" stroke-linecap="round">${title}</path>`;
+      }).join('');
+
+      container.innerHTML = `
+        <svg viewBox="0 0 200 200" role="img" aria-label="${LABELS[tab]} completion by difficulty">
+          ${tracks}
+          ${arcs}
+        </svg>`;
+    }
+
+    // Monthly bar graph with a linear trend line, January to the current month only.
+    // Uses dummy zeros until real monthly counts are in the data file.
+    function renderGraph(tab) {
+      const container = document.querySelector(`[data-graph="${tab}"]`);
+      if (!container) return;
+
+      const now = new Date();
+      const monthsShown = now.getMonth() + 1; // Jan..current month
+      const real = DATA.monthly && DATA.monthly[tab];
+      const values = Array.from({ length: monthsShown }, (_, i) =>
+        (real && real[i]) || 0
+      );
+
+      const W = 360, H = 150, PAD_L = 8, PAD_R = 8, PAD_T = 12, PAD_B = 24;
+      const innerW = W - PAD_L - PAD_R;
+      const innerH = H - PAD_T - PAD_B;
+      const baseline = PAD_T + innerH;
+      const maxValue = Math.max(0, ...values);
+      // Tallest bar sits at ~80% of the height; the scale never drops below 4
+      const yMax = Math.max(4, Math.ceil(maxValue / 0.8));
+      const xStep = monthsShown > 1 ? innerW / (monthsShown - 1) : 0;
+      const toY = (v) => baseline - (Math.min(v, yMax) / yMax) * innerH;
+
+      // Bars, each with a full-column transparent hit area for the tooltip
+      const barW = monthsShown > 1 ? Math.min(xStep * 0.6, 18) : 18;
+      const hitW = monthsShown > 1 ? xStep : 18;
+      const bars = values.map((v, i) => {
+        const cx = PAD_L + i * xStep;
+        const y = toY(v);
+        const h = baseline - y;
+        const label = `${MONTHS[i]}: ${v} ${v === 1 ? 'solve' : 'solves'}`;
+        return `
+          <rect x="${cx - barW / 2}" y="${y}" width="${barW}" height="${h}" rx="2" fill="${BAR_GREEN}" />
+          <rect x="${cx - hitW / 2}" y="${PAD_T}" width="${hitW}" height="${innerH}" fill="transparent">
+            <title>${label}</title>
+          </rect>`;
+      }).join('');
+
+      // Trend line only once at least two months have solves
+      const monthsWithSolves = values.filter((v) => v > 0).length;
+      let trend = '';
+      if (monthsWithSolves >= 2) {
+        const n = monthsShown;
+        let sx = 0, sy = 0, sxy = 0, sxx = 0;
+        values.forEach((v, i) => { sx += i; sy += v; sxy += i * v; sxx += i * i; });
+        const slope = (n * sxy - sx * sy) / (n * sxx - sx * sx);
+        const intercept = (sy - slope * sx) / n;
+        const y0 = Math.max(0, intercept);
+        const y1 = Math.max(0, intercept + slope * (n - 1));
+
+        // Green when growing, red when dropping, gray when flat
+        const color = slope > 0 ? BAR_GREEN : slope < 0 ? '#e05555' : '#d4d4d4';
+        const direction = slope > 0 ? 'Growing' : slope < 0 ? 'Dropping' : 'Flat';
+
+        trend = `<line x1="${PAD_L}" y1="${toY(y0)}" x2="${PAD_L + (n - 1) * xStep}" y2="${toY(y1)}"
+          stroke="${color}" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.9">
+          <title>Trend: ${direction}</title></line>`;
+      }
+
+      const labels = MONTHS.slice(0, monthsShown).map((m, i) =>
+        `<text x="${PAD_L + i * xStep}" y="${H - 6}" fill="#d4d4d4" font-size="10" text-anchor="middle">${m}</text>`
+      ).join('');
+
+      container.innerHTML = `
+        <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${LABELS[tab]} solved per month">
+          <line x1="${PAD_L}" y1="${baseline}" x2="${W - PAD_R}" y2="${baseline}" stroke="${TRACK_COLOR}" />
+          ${bars}
+          ${trend}
+          ${labels}
+        </svg>`;
+    }
+
+    // Tabs
+    const tabs = document.querySelectorAll('.htb-tab');
+    tabs.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.tab;
+        tabs.forEach((b) => b.classList.toggle('active', b === btn));
+        document.querySelectorAll('.htb-panel').forEach((p) =>
+          p.classList.toggle('active', p.dataset.panel === target)
+        );
+      });
+    });
+
+    // Render all three panels
+    ['machines', 'sherlocks', 'challenges'].forEach((tab) => {
+      const section = DATA[tab];
+      if (!section) return;
+      renderTab(tab, section);
+      renderRing(tab, section.difficulties);
+      renderGraph(tab);
+    });
+
+    // "Last updated x ago"
+    const updatedEl = document.getElementById('htb-updated');
+    if (updatedEl && DATA.fetched_at) {
+      const updated = new Date(DATA.fetched_at);
+      const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+      const units = [['year', 31536000], ['month', 2592000], ['week', 604800],
+                     ['day', 86400], ['hour', 3600], ['minute', 60]];
+      const render = () => {
+        const s = (Date.now() - updated.getTime()) / 1000;
+        let text = 'Last updated just now';
+        for (const [u, n] of units) {
+          if (Math.abs(s) >= n) { text = 'Last updated ' + rtf.format(-Math.round(s / n), u); break; }
+        }
+        updatedEl.textContent = text;
+      };
+      render();
+      setInterval(render, 60000);
+    }
+  })();
+</script>

@@ -35,11 +35,14 @@ I like to collect badges, but these should not be used to solely determine someo
 - [ ] ODPC
 - [ ] 100% Hack The Box
 
-![alt text](/assets/img/profile/HTB-profile.png){: w="300" h="200"}
+
+<div>
+{% include htb-activity.html %}
+</div>
+
 
 - [ ] 100% Pwn.College
 
-
-<div markdown="0">
+<div>
 {% include pwn-activity.html %}
 </div>

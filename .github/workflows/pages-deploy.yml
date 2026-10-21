@@ -24,6 +24,9 @@ jobs:
       - name: Fetch pwn.college activity
         run: node _scripts/fetch_activity.js
 
+      - name: Fetch Hack The Box progress
+        run: node _scripts/fetch_htb.js
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
