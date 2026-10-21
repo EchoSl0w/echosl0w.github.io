@@ -20,7 +20,7 @@ Greetings reader, I'm Echo_Slow (Mijo Misic). You've probably seen me around in 
 
 I like to collect badges, but these should not be used to solely determine someone's skill.
 
-![alt text](/assets/img/profile/OSEP.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/OSCP.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/RTL.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/RTO.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/CWEE.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/CWES.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/CRTP.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/eJPT.png){: w="70" h="15" .left}
+![alt text](/assets/img/profile/OSEP.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/OSCP.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/RTL.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/RTO.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/CWEE.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/CWES.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/CRTE.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/CRTP.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/ADCS.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/eJPT.png){: w="70" h="15" .left}
 
 <BR CLEAR=ALL />
 
