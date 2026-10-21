@@ -39,6 +39,7 @@ I like to collect badges, but these should not be used to solely determine someo
 
 - [ ] 100% Pwn.College
 
-![alt text](/assets/img/profile/pwncollege-profile.png){: w="300" h="200"}
 
-
+<div markdown="0">
+{% include pwn-activity.html %}
+</div>
