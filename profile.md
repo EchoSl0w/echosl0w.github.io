@@ -1,5 +1,5 @@
 ---
-layout: profile
+layout: page
 title: Profile
 icon: fas fa-info-circle
 permalink: /
@@ -20,9 +20,18 @@ Greetings reader, I'm Echo_Slow (Mijo Misic). You've probably seen me around in 
 
 I like to collect badges, but these should not be used to solely determine someone's skill.
 
-![alt text](/assets/img/profile/OSEP.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/OSCP.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/RTL.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/RTO.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/CWEE.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/CWES.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/CRTE.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/CRTP.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/ADCS.png){: w="100" h="50" .left} ![alt text](/assets/img/profile/eJPT.png){: w="70" h="15" .left}
-
-<BR CLEAR=ALL />
+<div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 g-3">
+  <div class="col"><a href="/assets/img/profile/OSEP.png" class="popup img-link"><img src="/assets/img/profile/OSEP.png" alt="OSEP certification" width="100" height="100" loading="lazy"></a></div>
+  <div class="col"><a href="/assets/img/profile/OSCP.png" class="popup img-link"><img src="/assets/img/profile/OSCP.png" alt="OSCP certification" width="100" height="100" loading="lazy"></a></div>
+  <div class="col"><a href="/assets/img/profile/RTL.png" class="popup img-link"><img src="/assets/img/profile/RTL.png" alt="RTL certification" width="100" height="100" loading="lazy"></a></div>
+  <div class="col"><a href="/assets/img/profile/RTO.png" class="popup img-link"><img src="/assets/img/profile/RTO.png" alt="RTO certification" width="100" height="100" loading="lazy"></a></div>
+  <div class="col"><a href="/assets/img/profile/CWEE.png" class="popup img-link"><img src="/assets/img/profile/CWEE.png" alt="CWEE certification" width="100" height="100" loading="lazy"></a></div>
+  <div class="col"><a href="/assets/img/profile/CWES.png" class="popup img-link"><img src="/assets/img/profile/CWES.png" alt="CWES certification" width="100" height="100" loading="lazy"></a></div>
+  <div class="col"><a href="/assets/img/profile/CRTE.png" class="popup img-link"><img src="/assets/img/profile/CRTE.png" alt="CRTE certification" width="100" height="100" loading="lazy"></a></div>
+  <div class="col"><a href="/assets/img/profile/CRTP.png" class="popup img-link"><img src="/assets/img/profile/CRTP.png" alt="CRTP certification" width="100" height="100" loading="lazy"></a></div>
+  <div class="col"><a href="/assets/img/profile/ADCS.png" class="popup img-link"><img src="/assets/img/profile/ADCS.png" alt="ADCS certification" width="100" height="100" loading="lazy"></a></div>
+  <div class="col"><a href="/assets/img/profile/eJPT.png" class="popup img-link"><img src="/assets/img/profile/eJPT.png" alt="eJPT certification" width="100" height="100" loading="lazy" style="width: 100px; height: 100px; object-fit: contain;"></a></div>
+</div>
 
 ## Goals
 
