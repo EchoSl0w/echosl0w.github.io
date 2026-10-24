@@ -26,3 +26,6 @@ package-lock.json
 _sass/vendors
 assets/js/dist
 .qodo
+
+htb_progress.json
+pwn_activity.json
